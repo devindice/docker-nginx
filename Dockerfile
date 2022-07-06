@@ -80,7 +80,7 @@ RUN \
     php7-xmlrpc \
     php7-xsl \
     php7-zip \
-    inetutils-ping \
+    iputils \
     bind-tools \
     busybox-extras \
     dnsmasq && \
