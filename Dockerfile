@@ -80,9 +80,9 @@ RUN \
     php7-xmlrpc \
     php7-xsl \
     php7-zip \
-    iputils-ping \
-    dnsutils \
-    telnet \
+    inetutils-ping \
+    bind-tools \
+    busybox-extras \
     dnsmasq && \
   echo "**** configure nginx ****" && \
   rm -f /etc/nginx/http.d/default.conf && \
