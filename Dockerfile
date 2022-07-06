@@ -79,7 +79,11 @@ RUN \
     php7-xmlreader \
     php7-xmlrpc \
     php7-xsl \
-    php7-zip && \
+    php7-zip \
+    iputils-ping \
+    dnsutils \
+    telnet \
+    dnsmasq && \
   echo "**** configure nginx ****" && \
   rm -f /etc/nginx/http.d/default.conf && \
   sed -i \
