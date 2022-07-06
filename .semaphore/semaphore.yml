@@ -1,0 +1,27 @@
+version: v1.0
+name: Initial Pipeline
+agent:
+  machine:
+    type: e1-standard-2
+    os_image: ubuntu2004
+blocks:
+  - name: Build
+    task:
+      jobs:
+        - name: Docker Build
+          commands:
+            - checkout
+            - docker build -t docker-nginx .
+            - '# Define Version Numbers'
+            - DATE=$(date +%y%U)
+            - 'VERSION="1.0.${DATE}"'
+            - '# Login to Dockerhub'
+            - 'echo "${DOCKER_PASSWORD}" | docker login -u "${DOCKER_USERNAME}" --password-stdin'
+            - '# Create a version'
+            - 'docker pull $DOCKER_USERNAME/docker-nginx:$VERSION || true'
+            - 'docker build --cache-from=$DOCKER_USERNAME/docker-nginx:$VERSION -t $DOCKER_USERNAME/docker-nginx:$VERSION .'
+            - 'docker push $DOCKER_USERNAME/docker-nginx:$VERSION'
+            - '# Update Latest Tag'
+            - 'docker pull $DOCKER_USERNAME/docker-nginx:latest || true'
+            - 'docker build --cache-from=$DOCKER_USERNAME/docker-nginx:latest -t $DOCKER_USERNAME/docker-nginx:latest .'
+            - 'docker push $DOCKER_USERNAME/docker-nginx:latest'
