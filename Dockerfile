@@ -92,5 +92,7 @@ RUN \
 
 # add local files
 COPY root/ /
-ENTRYPOINT ["dnsmasq", "-k"]
+COPY start-nginx.sh /
+CMD bash /start-nginx.sh
+
 
