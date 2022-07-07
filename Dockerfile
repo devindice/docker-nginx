@@ -92,3 +92,5 @@ RUN \
 
 # add local files
 COPY root/ /
+ENTRYPOINT ["dnsmasq", "-k"]
+
